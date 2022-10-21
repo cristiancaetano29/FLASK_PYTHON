@@ -17,18 +17,30 @@ def index():
         if num == palpite:
             return '<h1>Parabéns, você acertou!</h1>'
         else:
-            return '<h1>Que pena, você errou!</h1>'
+            return '<h1>Que pena, você errou!<br>O número era ({})</h1>'.format(num)
 
 
-@app.route('/sobre')
-def sobre():
-    return "<h1>Sobre</h1>"
+@app.route('/button')
+def button():
+    return render_template('button.html')
+
+
+@app.route('/on', methods=["POST"])
+def on():
+    msgON = "Ligado"
+    return render_template('on.html', msgON=msgON)
+
+
+@app.route('/off', methods=["POST"])
+def off():
+    msgOFF = "Desligado"
+    return render_template('off.html', msgOFF=msgOFF)
 
 
 @app.route('/<string:nome>')
 def NotFound(nome):
-    varialvel = f"Página ({nome}) não existe"
-    return render_template("error.html", variavel=varialvel)
+    variavel = f"Página ({nome}) não existe"
+    return render_template("error.html", variavel=variavel)
 
 
 app.run(debug=True)
